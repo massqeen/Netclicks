@@ -1,7 +1,8 @@
-const leftMenu = document.querySelector('.left-menu');
-const hamburger = document.querySelector('.hamburger');
-const dropdown = document.querySelectorAll('.dropdown');
-const teaserImg = document.querySelectorAll('.tv-card__img');
+const leftMenu = document.querySelector('.left-menu'),
+    hamburger = document.querySelector('.hamburger'),
+    dropdown = document.querySelectorAll('.dropdown'),
+    tvShowsList = document.querySelector('.tv-shows__list'),
+    modal = document.querySelector('.modal');
 
 //open left-menu on click by hamburger btn
 hamburger.addEventListener('click', event => {
@@ -19,7 +20,6 @@ document.addEventListener('click', event => {
         //close all dropdown menus on closing left-menu
         dropdown.forEach(Element => {
             Element.classList.remove('active');
-            console.log(Element.className);
         })
     }
 })
@@ -37,13 +37,40 @@ leftMenu.addEventListener('click', event => {
 })
 
 //for mouse hover on image show background teaser, else get back to main image
-teaserImg.forEach(Element => {
-    const imgUrl = Element.src;
-    const backImgUrl = Element.getAttribute('data-backdrop');
-    Element.addEventListener('mouseover', event => {
-        Element.src = backImgUrl;
-    });
-    Element.addEventListener('mouseout', event => {
-        Element.src = imgUrl;
-    });
+const switchImage = event => {
+    const target = event.target;
+    const card = target.closest('.tv-shows__item');
+
+    if (card) {
+        const img = card.querySelector('.tv-card__img');
+        //checking if there is a backdrop img in the card
+        if (img.dataset.backdrop) {
+            [img.src, img.dataset.backdrop] = [img.dataset.backdrop, img.src]
+        }
+    }
+}
+tvShowsList.addEventListener('mouseover', switchImage)
+tvShowsList.addEventListener('mouseout', switchImage)
+
+//opening modal window
+tvShowsList.addEventListener('click', event => {
+    const target = event.target;
+    const card = target.closest('.tv-card');
+
+    if (card) {
+        document.body.style.overflow = 'hidden';
+        modal.classList.remove('hide');
+    }
+})
+
+//closing modal window on cross click or click outside modal window
+modal.addEventListener('click', event => {
+    const target = event.target;
+    const modalOut = target.classList.contains('modal');
+    const cross = target.closest('.cross');
+
+    if (cross || modalOut) {
+        document.body.style.overflow = '';
+        modal.classList.add('hide');
+    }
 })
