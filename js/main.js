@@ -20,9 +20,9 @@ document.addEventListener('click', event => {
         //close all dropdown menus on closing left-menu
         dropdown.forEach(Element => {
             Element.classList.remove('active');
-        })
+        });
     }
-})
+});
 
 //open dropdown menu on click by any element of .dropdown. also open left-menu
 leftMenu.addEventListener('click', event => {
@@ -34,7 +34,7 @@ leftMenu.addEventListener('click', event => {
         leftMenu.classList.add('openMenu');
         hamburger.classList.add('open');
     }
-})
+});
 
 //for mouse hover on image show background teaser, else get back to main image
 const switchImage = event => {
@@ -45,12 +45,12 @@ const switchImage = event => {
         const img = card.querySelector('.tv-card__img');
         //checking if there is a backdrop img in the card
         if (img.dataset.backdrop) {
-            [img.src, img.dataset.backdrop] = [img.dataset.backdrop, img.src]
+            [img.src, img.dataset.backdrop] = [img.dataset.backdrop, img.src];
         }
     }
-}
-tvShowsList.addEventListener('mouseover', switchImage)
-tvShowsList.addEventListener('mouseout', switchImage)
+};
+tvShowsList.addEventListener('mouseover', switchImage);
+tvShowsList.addEventListener('mouseout', switchImage);
 
 //opening modal window
 tvShowsList.addEventListener('click', event => {
@@ -61,7 +61,7 @@ tvShowsList.addEventListener('click', event => {
         document.body.style.overflow = 'hidden';
         modal.classList.remove('hide');
     }
-})
+});
 
 //closing modal window on cross click or click outside modal window
 modal.addEventListener('click', event => {
@@ -73,4 +73,4 @@ modal.addEventListener('click', event => {
         document.body.style.overflow = '';
         modal.classList.add('hide');
     }
-})
+});
