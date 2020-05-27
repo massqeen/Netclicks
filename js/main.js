@@ -1,4 +1,8 @@
-const leftMenu = document.querySelector('.left-menu'),
+const IMG_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2',
+    API_KEY = null;
+
+const
+    leftMenu = document.querySelector('.left-menu'),
     hamburger = document.querySelector('.hamburger'),
     dropdown = document.querySelectorAll('.dropdown'),
     tvShowsList = document.querySelector('.tv-shows__list'),
@@ -14,7 +18,7 @@ const DBservice = class {
             return response.json(); //метод json преобразует файл json в структурированные данные - объект или массив
         } else {
             throw new Error(`Не удалось получить данные по адресу ${url}`); //вывод сообщения на случай ошибки получения данных с сервера
-        }
+        };
     }
 
     /*тестируем работу класса - тестовый метод получения данных 
@@ -31,20 +35,34 @@ const DBservice = class {
 
 //генерация карточки на основе полученных от сервера данных
 const renderCard = serverData => {
-    console.log(serverData);
+    // console.log(serverData);
     serverData.results.forEach(item => {
+        //деструктуризация полученных данных из item
+        const {
+            backdrop_path: backdrop,
+            name: title,
+            poster_path: poster,
+            vote_average: vote
+        } = item;
+
+        //тернарный оператор - до "?"" условие, а потом "то" и "иначе"
+        const posterIMG = poster ? IMG_URL + poster : 'img/no-poster.jpg';
+        const backdropIMG = backdrop ? IMG_URL + backdrop : '';
+        const voteElem = vote ? `<span class = "tv-card__vote">${vote}</span>` : '';
+
+
         const card = document.createElement('li');
         card.className = ('tv-shows__item');
         card.innerHTML = `
             <a href = "#" class = "tv-card">
-                <span class = "tv-card__vote">6.2</span>
+                ${voteElem}
                 <img
                     class = "tv-card__img"
-                    src = "https://image.tmdb.org/t/p/w185_and_h278_bestv2/cPWxWAlsJw1QVNNuufPzZzebVtY.jpg"
-                    data-backdrop = "https://image.tmdb.org/t/p/w185_and_h278_bestv2/3bBC4u27W4TfOkCVKds7nofJCfe.jpg"
-                    alt = "Star Wars: Jedi Temple Challenge" 
+                    src = "${posterIMG}"
+                    data-backdrop = "${backdropIMG}"
+                    alt = "${title}" 
                 />
-                <h4 class = "tv-card__head">Star Wars: Jedi Temple Challenge</h4> 
+                <h4 class = "tv-card__head">${title}</h4> 
             </a>
         `;
         tvShowsList.prepend(card);
@@ -55,11 +73,6 @@ const renderCard = serverData => {
 
 //при получении данных с сервера и создании объекта запускаем генерацию карточки
 new DBservice().getTestData().then(renderCard);
-
-
-
-
-
 
 
 //open left-menu on click by hamburger btn
@@ -98,6 +111,7 @@ leftMenu.addEventListener('click', event => {
 const switchImage = event => {
     const target = event.target;
     const card = target.closest('.tv-shows__item');
+
 
     if (card) {
         const img = card.querySelector('.tv-card__img');
