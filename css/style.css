@@ -452,7 +452,7 @@ main {
   display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fill, 185px);
-  grid-gap: 1rem;
+  grid-gap: 3rem 1rem;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -460,7 +460,6 @@ main {
 
 .tv-shows__item {
   min-width: 185px;
-  margin: 15px 10px 30px;
 }
 
 .tv-card {
@@ -508,6 +507,9 @@ main {
 .tv-card__img {
   height: 278px;
   width: 185px;
+}
+
+.tv-card__img[src] {
   transition: all 1s linear;
 }
 
