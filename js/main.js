@@ -11,23 +11,23 @@ const
 //request to the database service
 const DBservice = class {
     //обращение к серверу и получение данных из url
-    getData = async (url) => {
+    async getData(url) {
         const response = await fetch(url); //fetch - api to get data from url
 
         if (response.ok) { //проверяем статус ответа о получении данных
             return response.json(); //метод json преобразует файл json в структурированные данные - объект или массив
         } else {
             throw new Error(`Не удалось получить данные по адресу ${url}`); //вывод сообщения на случай ошибки получения данных с сервера
-        };
+        }
     }
 
     /*тестируем работу класса - тестовый метод получения данных 
     из локального json файла*/
-    getTestData = () => {
+    getTestData() {
         return this.getData('test.json');
     }
 
-}
+};
 //пример получения данных из локального test.json
 // new DBservice().getTestData().then((data) => {
 //     console.log(data);
