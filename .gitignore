@@ -2,6 +2,7 @@
 
 # Ignore files called 'file.ext'
 file.ext
+api.key
 
 # Comments can't be on the same line as rules!
 # The following line ignores files called 'file.ext # not a comment'
@@ -74,4 +75,3 @@ DirectoryA/**/DirectoryB/
 # Use the backslash as escape character to ignore files with a hash (#)
 # (supported since 1.6.2.1)
 \#*#
-api.key
