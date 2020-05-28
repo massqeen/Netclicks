@@ -1,22 +1,27 @@
 const IMG_URL = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2',
     SERVER = 'https://api.themoviedb.org/3';
 
-
 const
     leftMenu = document.querySelector('.left-menu'),
     hamburger = document.querySelector('.hamburger'),
     tvShowsList = document.querySelector('.tv-shows__list'),
     modal = document.querySelector('.modal'),
     tvShows = document.querySelector('.tv-shows'),
+    tvShowsHead = document.querySelector('.tv-shows__head'),
+    preloader = document.querySelector('.sk-folding-cube'),
     //данные из модального окна
     tvCardImg = document.querySelector('.tv-card__img'),
     modalTitle = document.querySelector('.modal__title'),
+    modalContent = document.querySelector('.modal__content'),
     genresList = document.querySelector('.genres-list'),
     rating = document.querySelector('.rating'),
     description = document.querySelector('.description'),
     modalLink = document.querySelector('.modal__link'),
+    posterWrapper = document.querySelector('.poster__wrapper'),
     searchForm = document.querySelector('.search__form'),
     searchFormInput = document.querySelector('.search__form-input');
+
+window.API_KEY = null;
 
 
 const loading = document.createElement('div');
@@ -62,10 +67,32 @@ const DBservice = class {
         return this.getData(SERVER + '/tv/' + id + '?api_key=' +
             API_KEY + '&language=ru-RU');
     }
+
+    //запрос популярных для главной
+    getPopular() {
+        return this.getData(SERVER + '/tv/popular?api_key=' +
+            API_KEY + '&language=ru-RU&page=1');
+    }
+
+    //топ-рейтинговые
+    getTopRated() {
+        return this.getData(SERVER + '/tv/top_rated?api_key=' +
+            API_KEY + '&language=ru-RU&page=1');
+    }
+
+    //сегодня
+    getToday() {
+        return this.getData(SERVER + '/tv/airing_today?api_key=' +
+            API_KEY + '&language=ru-RU&page=1');
+    }
+
+    //на неделю
+    getWeek() {
+        return this.getData(SERVER + '/tv/on_the_air?api_key=' +
+            API_KEY + '&language=ru-RU&page=1');
+    }
+
 };
-
-new DBservice().getAPIKey();
-
 
 //пример получения данных из локального test.json
 // new DBservice().getTestData().then((data) => {
@@ -75,7 +102,13 @@ new DBservice().getAPIKey();
 //генерация карточки на основе полученных от сервера данных
 const renderCard = serverData => {
     tvShowsList.innerHTML = '';
-    // console.log(serverData);
+
+    if (!serverData.total_results) {
+        tvShowsHead.insertAdjacentHTML('afterend',
+            `<p class="sorry">Извините, по вашему запросу ничего не найдено!</p>`);
+        tvShowsHead.style.cssText = 'color: red; text-decoration: underline;';
+    }
+
     serverData.results.forEach(item => {
         //деструктуризация полученных данных из item
         const {
@@ -85,6 +118,7 @@ const renderCard = serverData => {
             vote_average: vote,
             id
         } = item;
+
 
         //тернарный оператор - до "?"" условие, а потом "то" и "иначе"
         const posterIMG = poster ? IMG_URL + poster : 'img/no-poster.jpg';
@@ -111,6 +145,12 @@ const renderCard = serverData => {
     });
     loading.remove();
 };
+
+// new DBservice().getAPIKey().then(console.log(API_KEY));
+// //список популярных на главную при загрузке страницы
+// new DBservice().getPopular().then(renderCard);
+
+
 
 //поиск фильмов через форму
 searchForm.addEventListener('submit', event => {
@@ -160,6 +200,21 @@ leftMenu.addEventListener('click', event => {
         leftMenu.classList.add('openMenu');
         hamburger.classList.add('open');
     }
+
+    //отслеживаем клики по ссылкам бокового меню
+    if (target.closest('#top-rated')) {
+        new DBservice().getTopRated().then(renderCard);
+    }
+    if (target.closest('#popular')) {
+        new DBservice().getPopular().then(renderCard);
+    }
+    if (target.closest('#week')) {
+        new DBservice().getWeek().then(renderCard);
+    }
+    if (target.closest('#today')) {
+        new DBservice().getToday().then(renderCard);
+    }
+
 });
 
 //for mouse hover on image show background teaser, else get back to main image
@@ -189,7 +244,7 @@ tvShowsList.addEventListener('click', event => {
     const card = target.closest('.tv-card');
 
     if (card) {
-
+        preloader.style.display = 'block';
         new DBservice().getModalTvShow(card.id)
             .then(({
                 poster_path: posterPath,
@@ -199,8 +254,16 @@ tvShowsList.addEventListener('click', event => {
                 overview,
                 homepage
             }) => {
-                tvCardImg.src = IMG_URL + posterPath;
-                tvCardImg.alt = title;
+
+                if (posterPath) {
+                    tvCardImg.src = IMG_URL + posterPath;
+                    tvCardImg.alt = title;
+                    posterWrapper.style.display = '';
+                } else {
+                    posterWrapper.style.display = 'none';
+                    modalContent.style.paddingLeft = '25px';
+                }
+
                 modalTitle.textContent = title;
 
                 //в комментариях альтернативный метод получения жанров функцией reduce
@@ -228,6 +291,10 @@ tvShowsList.addEventListener('click', event => {
             .then(() => {
                 document.body.style.overflow = 'hidden';
                 modal.classList.remove('hide');
+                preloader.classList.remove('preloader--active');
+            })
+            .finally(() => {
+                preloader.style.display = '';
             });
 
     }
@@ -244,3 +311,12 @@ modal.addEventListener('click', event => {
         modal.classList.add('hide');
     }
 });
+
+
+
+
+startPage = () => {
+    new DBservice().getPopular().then(renderCard);
+}
+
+new DBservice().getAPIKey().then(startPage);

@@ -1,7 +1,6 @@
 # Lines starting with `#` are comments.
 
 # Ignore files called 'file.ext'
-file.ext
 api.key
 
 # Comments can't be on the same line as rules!
@@ -11,8 +10,10 @@ file.ext # not a comment
 # Ignoring files with full path.
 # This matches files in the root directory and subdirectories too.
 # i.e. otherfile.ext will be ignored anywhere on the tree.
-dir/otherdir/file.ext
-otherfile.ext
+# dir/otherdir/file.ext
+# otherfile.ext
+
+
 
 # Ignoring directories
 # Both the directory itself and its contents will be ignored.
