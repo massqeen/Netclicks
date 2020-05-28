@@ -528,7 +528,7 @@ main {
   width: 100vw;
   height: 100vh;
   z-index: 990;
-  background-color: rgba(0, 173, 220, 0.5);
+  background-color: rgba(0, 24, 31, 0.95);
 }
 
 .modal__content {
@@ -594,7 +594,7 @@ main {
   left: -80px;
   width: 185px;
   height: 278px;
-  box-shadow: 2px 2px 5px 1px rgba(53, 117, 184, 0.49);
+  box-shadow: 1px -1px 10px 4px rgba(53, 117, 184, 0.49);
 }
 
 .cross {
