@@ -75,4 +75,4 @@ DirectoryA/**/DirectoryB/
 # (supported since 1.6.2.1)
 \#*#
 
-api.js
+api.key
