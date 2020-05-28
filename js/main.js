@@ -47,7 +47,7 @@ const DBservice = class {
     }
 
     async getAPIKey() {
-        const response = await fetch('./config/api.key');
+        const response = await fetch('config/api.key');
         window.API_KEY = await response.text();
     }
 
@@ -63,6 +63,9 @@ const DBservice = class {
             API_KEY + '&language=ru-RU');
     }
 };
+
+new DBservice().getAPIKey();
+
 
 //пример получения данных из локального test.json
 // new DBservice().getTestData().then((data) => {
