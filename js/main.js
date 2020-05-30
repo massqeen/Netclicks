@@ -256,6 +256,7 @@ tvShowsList.addEventListener('click', event => {
                     tvCardImg.src = IMG_URL + posterPath;
                     tvCardImg.alt = title;
                     posterWrapper.style.display = '';
+                    modalContent.style.paddingLeft = '';
                 } else {
                     posterWrapper.style.display = 'none';
                     modalContent.style.paddingLeft = '25px';
