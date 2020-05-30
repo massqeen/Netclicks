@@ -8,6 +8,7 @@ const
     modal = document.querySelector('.modal'),
     tvShows = document.querySelector('.tv-shows'),
     tvShowsHead = document.querySelector('.tv-shows__head'),
+    sorry = document.querySelector('.sorry'),
     preloader = document.querySelector('.sk-folding-cube'),
     //данные из модального окна
     tvCardImg = document.querySelector('.tv-card__img'),
@@ -102,11 +103,11 @@ const DBservice = class {
 //генерация карточки на основе полученных от сервера данных
 const renderCard = serverData => {
     tvShowsList.innerHTML = '';
+    sorry.innerHTML = '';
 
     if (!serverData.total_results) {
-        tvShowsHead.insertAdjacentHTML('afterend',
-            `<p class="sorry">Извините, по вашему запросу ничего не найдено!</p>`);
-        tvShowsHead.style.cssText = 'color: red; text-decoration: underline;';
+        sorry.textContent = 'Извините, по вашему запросу ничего не найдено!';
+        sorry.style.cssText = 'color: red; text-decoration: none;';
     }
 
     serverData.results.forEach(item => {
@@ -146,11 +147,6 @@ const renderCard = serverData => {
     loading.remove();
 };
 
-// new DBservice().getAPIKey().then(console.log(API_KEY));
-// //список популярных на главную при загрузке страницы
-// new DBservice().getPopular().then(renderCard);
-
-
 
 //поиск фильмов через форму
 searchForm.addEventListener('submit', event => {
@@ -159,6 +155,7 @@ searchForm.addEventListener('submit', event => {
 
     //проверяем, чтобы поле поиска было не пустым, потом выполняем поиск
     if (value) {
+        tvShowsHead.textContent = 'Результат поиска';
         //вставляем прелоадер в начало секции для отображения процесса загрузки карточек
         tvShows.append(loading);
         //при получении данных с сервера и создании объекта запускаем генерацию карточки

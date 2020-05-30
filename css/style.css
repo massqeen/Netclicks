@@ -117,7 +117,8 @@ p {
   transition: 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
 }
 
-.left-menu:hover {
+.left-menu:hover,
+.left-menu:focus {
   height: 100%;
   background-color: #00838f;
 }
@@ -253,10 +254,8 @@ p {
 
 .left-menu__list li {
   width: 250px;
-  /* height: 40px; */
   line-height: 40px;
   color: #fff;
-  /* padding : 5px; */
   font-size: 13px;
 }
 
@@ -432,16 +431,41 @@ main {
   font-weight: 700;
 }
 
+.search__input-wrapper {
+  display: flex;
+  height: 40px;
+}
+
+.search__form-block {
+}
+
 .search__form-input {
-  width: 100%;
-  padding-top: 5px;
+  flex: 1 1 85%;
   border-style: none;
   outline: none;
   background-color: transparent;
+  border-bottom: 2px solid #ccc;
 }
 
 .search__form-input:focus {
   border-top: 2px solid #ccc;
+}
+
+.search__form-submit {
+  flex: 1 1 15%;
+  height: 100%;
+  background: #0b7dda url(../img/search.svg) center / 30% no-repeat;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  -webkit-box-shadow: 2px 2px 10px 0 rgba(31, 33, 34, 0.9);
+  -moz-box-shadow: 2px 2px 10px 0 rgba(31, 33, 34, 0.9);
+  box-shadow: 2px 2px 10px 0 rgba(31, 33, 34, 0.9);
+}
+
+.search__form-submit:active {
+  box-shadow: none;
+  outline: none;
 }
 
 .tv-shows__head {
@@ -492,8 +516,8 @@ main {
 
 .tv-card__vote {
   position: absolute;
-  top: 18px;
-  left: 1px;
+  bottom: 0;
+  right: 0;
   text-align: center;
   color: #ffffff;
   background-color: #ff637d;

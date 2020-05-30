@@ -107,7 +107,8 @@
         <section class="search">
           <form class="search__form">
             <h2 class="search__form-head">Поиск</h2>
-            <label class="search__form-block">
+            <div class="search__input-wrapper">
+              <label for="search"></label>
               <input
                 type="search"
                 class="search__form-input"
@@ -116,9 +117,10 @@
                 placeholder="Введи название..."
                 required
                 minlength="2"
+                autofocus
               />
-            </label>
-            <button class="submit" type="submit">Поиск СТИЛИЗУЙ МЕНЯ!</button>
+              <button class="search__form-submit" type="submit"></button>
+            </div>
           </form>
         </section>
       </div>
@@ -127,7 +129,8 @@
     <main>
       <div class="container">
         <section class="tv-shows">
-          <h3 class="tv-shows__head">Результат поиска</h3>
+          <h3 class="tv-shows__head"></h3>
+          <p class="sorry"></p>
           <ul class="tv-shows__list">
             <!-- <li class="tv-shows__item">
               <a href="#" class="tv-card">
