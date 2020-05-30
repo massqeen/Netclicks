@@ -436,9 +436,6 @@ main {
   height: 40px;
 }
 
-.search__form-block {
-}
-
 .search__form-input {
   flex: 1 1 85%;
   border-style: none;

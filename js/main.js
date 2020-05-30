@@ -314,6 +314,6 @@ modal.addEventListener('click', event => {
 
 startPage = () => {
     new DBservice().getPopular().then(renderCard);
-}
+};
 
 new DBservice().getAPIKey().then(startPage);
