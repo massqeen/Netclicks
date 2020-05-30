@@ -386,6 +386,17 @@ main {
   margin-top: 60px;
 }
 
+.main-logo {
+  width: 56px;
+  height: 118px;
+}
+
+.partner-logo {
+  width: 100px;
+  height: 90px;
+  margin-left: auto;
+}
+
 .title-wrapper {
   margin-right: 40px;
 }
@@ -394,29 +405,22 @@ main {
   font-size: 48px;
   font-weight: 900;
   text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #ffc107;
 }
 
 .subtitle {
   font-weight: 300;
   text-transform: uppercase;
+  text-align: center;
 }
 
-.header-flex {
-  margin-top: 60px;
+.logo-wrapper {
+  margin-top: 10px;
   margin-bottom: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-.search {
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.search__form {
-  padding-top: 15px;
 }
 
 .search__form-block {
@@ -451,7 +455,7 @@ main {
 .search__form-submit {
   flex: 1 1 15%;
   height: 100%;
-  background: #0b7dda url(../img/search.svg) center / 30% no-repeat;
+  background: #0b7dda url(../img/search.svg) center / 22% no-repeat;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -691,7 +695,7 @@ main {
   border-radius: 10px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .container {
     padding: 0 60px;
   }
@@ -703,15 +707,6 @@ main {
 }
 
 @media (max-width: 794px) {
-  .header-flex {
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-
-  .search {
-    width: 100%;
-  }
-
   .tv-shows__list {
     -ms-flex-pack: distribute;
     justify-content: space-around;
@@ -739,12 +734,18 @@ main {
   }
 }
 
-@media (max-width: 655px) {
-  .original__header {
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+@media (max-width: 767px) {
+  .search__form-submit {
+    background-size: 60% 70%;
+    flex-basis: 20%;
   }
 
+  .search__form-input {
+    flex-basis: 85%;
+  }
+}
+
+@media (max-width: 655px) {
   .poster__wrapper {
     margin: 0 auto;
   }
