@@ -260,6 +260,10 @@ p {
   font-size: 13px;
 }
 
+.left-menu__list > li {
+  margin-bottom: 10px;
+}
+
 .left-menu__list li:hover {
   background-color: #00bcd6;
   -webkit-transition: all ease 0.5s;
@@ -276,9 +280,11 @@ p {
 }
 
 .left-menu__list li a svg {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 30px;
   float: left;
+  padding: 10px 10px 0 10px;
+  fill: #fff;
   margin-left: 0;
 }
 
@@ -290,13 +296,6 @@ p {
 
 .dropdown-list li a span {
   padding-left: 30px;
-}
-
-.left-menu__list i.fa {
-  font-size: 25px;
-  padding: 10px;
-  width: 50px;
-  text-align: center;
 }
 
 .left-menu__list li ul li {
@@ -360,25 +359,23 @@ p {
   overflow: hidden;
 }
 
-.dropdown:before {
-  font-family: FontAwesome;
-  content: "\f105";
+.dropdown::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  display: block;
+  background: url(../img/next.svg) center no-repeat;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   transition: all 0.4s;
-  padding-right: 5px;
   right: 20px;
   position: absolute;
-  top: 4px;
+  top: 13px;
 }
 
-.dropdown.active:before {
-  font-family: FontAwesome;
-  content: "\f107";
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  transition: all 0.4s;
+.dropdown.active::before {
   padding-right: 5px;
+  transform: rotate(90deg);
 }
 
 .left-menu:not(.openMenu) li > .dropdown-list {
@@ -793,7 +790,7 @@ main {
   transform: translate(-50%, -50%);
 }
 
-.preloader:before {
+.preloader::before {
   content: "";
   display: block;
   width: 180%;
@@ -837,7 +834,7 @@ main {
   border-left: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-.preloader-three:after {
+.preloader-three::after {
   width: 20%;
   height: 60%;
   content: "";
@@ -870,7 +867,7 @@ main {
   transform: rotate(10deg);
 }
 
-.preloader-one:before {
+.preloader-one::before {
   content: "";
   position: absolute;
   width: 140%;
@@ -947,7 +944,7 @@ main {
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
-.sk-folding-cube .sk-cube:before {
+.sk-folding-cube .sk-cube::before {
   content: "";
   position: absolute;
   top: 0;
@@ -973,15 +970,15 @@ main {
   -webkit-transform: scale(1.1) rotateZ(270deg);
   transform: scale(1.1) rotateZ(270deg);
 }
-.sk-folding-cube .sk-cube2:before {
+.sk-folding-cube .sk-cube2::before {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
-.sk-folding-cube .sk-cube3:before {
+.sk-folding-cube .sk-cube3::before {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
-.sk-folding-cube .sk-cube4:before {
+.sk-folding-cube .sk-cube4::before {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
 }
@@ -1088,8 +1085,8 @@ main {
   }
 }
 
-.loading:before,
-.loading:after {
+.loading::before,
+.loading::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -1098,7 +1095,7 @@ main {
   border-radius: 3px;
 }
 
-.loading:before {
+.loading::before {
   right: calc(100% + 2px);
   -webkit-animation: 1.4s 0.2s ease infinite;
   animation: 1.4s 0.2s ease infinite;
@@ -1134,7 +1131,7 @@ main {
   }
 }
 
-div:after {
+div::after {
   left: calc(100% + 2px);
   -webkit-animation: 1.4s 0.2s ease infinite;
   animation: 1.4s 0.2s ease infinite;
